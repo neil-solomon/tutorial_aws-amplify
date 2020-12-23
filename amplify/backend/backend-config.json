@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "tutorialawsamplify86155137": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
