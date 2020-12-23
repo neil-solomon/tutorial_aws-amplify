@@ -1,0 +1,18 @@
+Following this tutorial: https://aws.amazon.com/getting-started/hands-on/build-react-app-amplify-graphql/
+
+When following the tutorial 'amplify init ...' was not working. I did 'amplify pull ...' as instructed 
+by the Amplify Console.
+
+I got a build error saying that had JSONValidationError.
+To fix this I went to AmplifyConsole > BuildSettings > BuildImageSettings > Edit and made sure the AmplifyCLI version is 
+the same that I'm using locally. 
+
+I then got a build error when cloning the repo. 
+I went to the github repo > settings > webhooks and deleted the amplify webhook.
+I then returned to Amplify Console and clicked Reconnect Repository.
+This didn't fix the issue, I also needed to create a service role that gives Amplify permission to update the backend:
+https://docs.aws.amazon.com/amplify/latest/userguide/how-to-service-role-amplify-console.html
+
+
+GraphQL endpoint: https://bj3bnlii2bepzckgf42awhoiu4.appsync-api.us-east-1.amazonaws.com/graphql
+GraphQL API KEY: da2-qgngowjs5ja75cc6id77xpa4su
