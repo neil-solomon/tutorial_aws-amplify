@@ -18,4 +18,8 @@ Gave the service role Permissions Policies: AdministratorAccess and Administrato
 GraphQL endpoint: https://bj3bnlii2bepzckgf42awhoiu4.appsync-api.us-east-1.amazonaws.com/graphql
 GraphQL API KEY: da2-qgngowjs5ja75cc6id77xpa4su
 
-!
+Follow this tutorial to set up facebook and google sign in
+https://docs.amplify.aws/lib/auth/social/q/platform/js#deploying-to-amplify-console
+Be sure to add the app id and app secrets to environment variables in Amplify console
+
+!!!
