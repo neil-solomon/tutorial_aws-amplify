@@ -1,6 +1,6 @@
 {
   "auth": {
-    "tutorialawsamplify86155137": {
+    "tutorialawsamplify": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
