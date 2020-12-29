@@ -12,9 +12,8 @@ I went to the github repo > settings > webhooks and deleted the amplify webhook.
 I then returned to Amplify Console and clicked Reconnect Repository.
 This didn't fix the issue, I also needed to create a service role that gives Amplify permission to update the backend:
 https://docs.aws.amazon.com/amplify/latest/userguide/how-to-service-role-amplify-console.html
-
+Gave the service role Permissions Policies: AdministratorAccess and AdministratorAccess-Amplify 
 
 GraphQL endpoint: https://bj3bnlii2bepzckgf42awhoiu4.appsync-api.us-east-1.amazonaws.com/graphql
 GraphQL API KEY: da2-qgngowjs5ja75cc6id77xpa4su
 
-!
