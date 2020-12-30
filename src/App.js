@@ -10,8 +10,6 @@ import {
 import { onCreateNote, onDeleteNote } from "./graphql/subscriptions";
 
 const initialFormState = { name: "", description: "" };
-const onCreateNoteSubscription = API.graphql(graphqlOperation(onCreateNote));
-const onDeleteNoteSubscription = API.graphql(graphqlOperation(onDeleteNote));
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -19,13 +17,17 @@ function App() {
 
   useEffect(() => {
     fetchNotes();
-    onCreateNoteSubscription.subscribe({
+    const onCreateNoteSubscription = API.graphql(
+      graphqlOperation(onCreateNote)
+    ).subscribe({
       next: (noteData) => {
         console.log("onCreateNoteSubscription", noteData);
         fetchNotes();
       },
     });
-    onDeleteNoteSubscription.subscribe({
+    const onDeleteNoteSubscription = API.graphql(
+      graphqlOperation(onDeleteNote)
+    ).subscribe({
       next: (noteData) => {
         console.log("onDeleteNoteSubscription", noteData);
         fetchNotes();
@@ -33,8 +35,8 @@ function App() {
     });
 
     return () => {
-      onCreateNoteSubscription.unsubsribe();
-      onDeleteNoteSubscription.unsubsribe();
+      onCreateNoteSubscription.unsubscribe();
+      onDeleteNoteSubscription.unsubscribe();
     };
   }, []);
 
