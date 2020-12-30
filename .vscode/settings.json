@@ -1,4 +1,5 @@
 {
+  "explorer.compactFolders": false,
   "files.exclude": {
     "amplify/.config": true,
     "amplify/**/*-parameters.json": true,

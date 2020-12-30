@@ -22,4 +22,11 @@ Follow this tutorial to set up facebook and google sign in
 https://docs.amplify.aws/lib/auth/social/q/platform/js#deploying-to-amplify-console
 Be sure to add the app id and app secrets to environment variables in Amplify console
 
-!!!
+The grapql api key expires after a week. To refresh it:
+1. in amplify/backend/tutorialAwsAmplify/parameters.json set CreateAPIKey: 0  
+2. amplify push and say yes to defaults
+3. in amplify/backend/tutorialAwsAmplify/parameters.json set CreateAPIKey: 1  
+4. amplify push and say yes to defaults
+Steps 1 and 2 delete the old key, steps 3 and 4 create the new key.
+Keys can be managed in the AWS AppSync Console under settings.
+https://docs.amplify.aws/cli/graphql-transformer/config-params#createapikey
