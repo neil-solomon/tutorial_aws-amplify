@@ -1,14 +1,4 @@
-type Note
-  @model
-  @auth(
-    rules: [
-      {
-        allow: owner
-        ownerField: "owner"
-        operations: [create, update, delete, read]
-      }
-    ]
-  ) {
+type Note @model @aws_cognito_user_pools {
   id: ID!
   name: String!
   description: String

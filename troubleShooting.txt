@@ -42,3 +42,5 @@ To make auth changes to a graphql thing
     Add/remove @auth from the entry
     'amplify api gql-compile' updates files (including the frontend)
     'amplify push' then push a commit to github for the frontend changes.
+
+Removing @auth and doing the above steps made everything work, even when Cognito was set as a secondary API authorization
