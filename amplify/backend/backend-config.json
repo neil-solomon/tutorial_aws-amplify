@@ -20,14 +20,7 @@
               "description": ""
             }
           },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authtutorialawsamplify"
-              }
-            }
-          ]
+          "additionalAuthenticationProviders": []
         }
       }
     }
