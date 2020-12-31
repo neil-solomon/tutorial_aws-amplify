@@ -30,3 +30,9 @@ The grapql api key expires after a week. To refresh it:
 Steps 1 and 2 delete the old key, steps 3 and 4 create the new key.
 Keys can be managed in the AWS AppSync Console under settings.
 https://docs.amplify.aws/cli/graphql-transformer/config-params#createapikey
+
+in progress:
+    Added @auth(rules: [{ allow: owner }]) to amplify/backend/tutorialAwsAmplify/schema.graphql
+    This should only allow users who created a post to be able to list, update, and delete that post.
+    In order to make this work I tried to 'amplify update api' and choose to use Cognito User Pool for api security, and 
+    choose API key as an additional authorization type. Also tried using API key as primary and Cognito as secondary, neither work.
