@@ -38,4 +38,7 @@ in progress:
     choose API key as an additional authorization type. Also tried using API key as primary and Cognito as secondary, neither work.
     Trying all of this messed up the deployed site, it now only works on localhost. Google login doesnt work.
 
-!
+To make auth changes to a graphql thing
+    Add/remove @auth from the entry
+    'amplify api gql-compile' updates files (including the frontend)
+    'amplify push' then push a commit to github for the frontend changes.
