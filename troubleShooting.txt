@@ -37,3 +37,5 @@ in progress:
     In order to make this work I tried to 'amplify update api' and choose to use Cognito User Pool for api security, and 
     choose API key as an additional authorization type. Also tried using API key as primary and Cognito as secondary, neither work.
     Trying all of this messed up the deployed site, it now only works on localhost. Google login doesnt work.
+
+!

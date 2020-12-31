@@ -13,7 +13,6 @@ export const createNote = /* GraphQL */ `
       image
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -29,7 +28,6 @@ export const updateNote = /* GraphQL */ `
       image
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -45,7 +43,6 @@ export const deleteNote = /* GraphQL */ `
       image
       createdAt
       updatedAt
-      owner
     }
   }
 `;
