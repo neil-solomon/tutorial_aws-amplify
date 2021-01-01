@@ -31,13 +31,6 @@ Steps 1 and 2 delete the old key, steps 3 and 4 create the new key.
 Keys can be managed in the AWS AppSync Console under settings.
 https://docs.amplify.aws/cli/graphql-transformer/config-params#createapikey
 
-in progress:
-    Added @auth(rules: [{ allow: owner }]) to amplify/backend/tutorialAwsAmplify/schema.graphql
-    This should only allow users who created a post to be able to list, update, and delete that post.
-    In order to make this work I tried to 'amplify update api' and choose to use Cognito User Pool for api security, and 
-    choose API key as an additional authorization type. Also tried using API key as primary and Cognito as secondary, neither work.
-    Trying all of this messed up the deployed site, it now only works on localhost. Google login doesnt work.
-
 To make auth changes to a graphql thing
     Add/remove @auth from the entry
     'amplify api gql-compile' updates files (including the frontend)
@@ -45,3 +38,11 @@ To make auth changes to a graphql thing
 
 Removing @auth and doing the above steps made everything work, even when Cognito was set as a secondary API authorization
 Tried using @aws_cognito_user_pools instead of @auth. didn't work
+
+It looks like the owner of a table entry is being correctly determined by user.
+The problem is that the current user is stored across the browser, so on page refresh I get logged in as the latest
+log in in the browser, even if it was from a different window. 
+
+The owner in dynamodb is the same as the username in coginto user pool, but this username is auto-generated random stuff.
+
+To make the subscription work make a graphql query the same way fetchNotes() does and pass in the username in the owner variable.

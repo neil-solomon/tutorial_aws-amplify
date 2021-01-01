@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { API, Storage, graphqlOperation, Auth } from "aws-amplify";
-import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+
 import { listNotes } from "./graphql/queries";
 import {
   createNote as createNoteMutation,
@@ -9,36 +8,64 @@ import {
 } from "./graphql/mutations";
 import { onCreateNote, onDeleteNote } from "./graphql/subscriptions";
 
+import { API, Storage, graphqlOperation, Auth } from "aws-amplify";
+import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+
 const initialFormState = { name: "", description: "" };
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
-
+  const [userEmail, setUserEmail] = useState("");
   useEffect(() => {
-    Auth.currentCredentials().then((data) => console.log(data));
+    Auth.currentUserInfo()
+      .then((data) => setUserEmail(data.attributes.email))
+      .catch((error) => console.log("userEmail error: ", error));
     fetchNotes();
-    // const onCreateNoteSubscription = API.graphql(
-    //   graphqlOperation(onCreateNote)
-    // ).subscribe({
-    //   next: (noteData) => {
-    //     console.log("onCreateNoteSubscription", noteData);
-    //     fetchNotes();
-    //   },
-    // });
-    // const onDeleteNoteSubscription = API.graphql(
-    //   graphqlOperation(onDeleteNote)
-    // ).subscribe({
-    //   next: (noteData) => {
-    //     console.log("onDeleteNoteSubscription", noteData);
-    //     fetchNotes();
-    //   },
-    // });
+    // Auth.currentCredentials().then((data) =>
+    //   console.log("currentCredentials", data)
+    // );
+    // Auth.currentAuthenticatedUser().then((data) =>
+    //   console.log("currentAuthenticatedUser: ", data)
+    // );
 
-    // return () => {
-    //   onCreateNoteSubscription.unsubscribe();
-    //   onDeleteNoteSubscription.unsubscribe();
-    // };
+    var onCreateNoteSubscription, onDeleteNoteSubscription;
+
+    Auth.currentAuthenticatedUser().then((user) => {
+      onCreateNoteSubscription = API.graphql({
+        query: onCreateNote,
+        variables: { owner: user.username },
+      }).subscribe({
+        next: (noteData) => {
+          console.log("onCreateNoteSubscription", noteData);
+          fetchNotes();
+        },
+        error: (error) => {
+          console.log("onCreateNoteSubscription error", error);
+        },
+      });
+      onDeleteNoteSubscription = API.graphql({
+        query: onDeleteNote,
+        variables: { owner: user.username },
+      }).subscribe({
+        next: (noteData) => {
+          console.log("onDeleteNoteSubscription", noteData);
+          fetchNotes();
+        },
+        error: (error) => {
+          console.log("onDeleteNoteSubscription error", error);
+        },
+      });
+    });
+
+    return () => {
+      if (onCreateNoteSubscription) {
+        onCreateNoteSubscription.unsubscribe();
+      }
+      if (onDeleteNoteSubscription) {
+        onDeleteNoteSubscription.unsubscribe();
+      }
+    };
   }, []);
 
   async function onChange(e) {
@@ -90,6 +117,7 @@ function App() {
   return (
     <div className="App">
       <h1>My Notes App</h1>
+      <h2>{"USER: " + userEmail}</h2>
       <input
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         placeholder="Note name"
