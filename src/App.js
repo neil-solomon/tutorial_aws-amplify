@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { API, Storage, graphqlOperation } from "aws-amplify";
+import { API, Storage, graphqlOperation, Auth } from "aws-amplify";
 import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 import { listNotes } from "./graphql/queries";
 import {
@@ -16,28 +16,29 @@ function App() {
   const [formData, setFormData] = useState(initialFormState);
 
   useEffect(() => {
+    Auth.currentCredentials().then((data) => console.log(data));
     fetchNotes();
-    const onCreateNoteSubscription = API.graphql(
-      graphqlOperation(onCreateNote)
-    ).subscribe({
-      next: (noteData) => {
-        console.log("onCreateNoteSubscription", noteData);
-        fetchNotes();
-      },
-    });
-    const onDeleteNoteSubscription = API.graphql(
-      graphqlOperation(onDeleteNote)
-    ).subscribe({
-      next: (noteData) => {
-        console.log("onDeleteNoteSubscription", noteData);
-        fetchNotes();
-      },
-    });
+    // const onCreateNoteSubscription = API.graphql(
+    //   graphqlOperation(onCreateNote)
+    // ).subscribe({
+    //   next: (noteData) => {
+    //     console.log("onCreateNoteSubscription", noteData);
+    //     fetchNotes();
+    //   },
+    // });
+    // const onDeleteNoteSubscription = API.graphql(
+    //   graphqlOperation(onDeleteNote)
+    // ).subscribe({
+    //   next: (noteData) => {
+    //     console.log("onDeleteNoteSubscription", noteData);
+    //     fetchNotes();
+    //   },
+    // });
 
-    return () => {
-      onCreateNoteSubscription.unsubscribe();
-      onDeleteNoteSubscription.unsubscribe();
-    };
+    // return () => {
+    //   onCreateNoteSubscription.unsubscribe();
+    //   onDeleteNoteSubscription.unsubscribe();
+    // };
   }, []);
 
   async function onChange(e) {

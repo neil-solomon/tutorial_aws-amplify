@@ -1,7 +1,6 @@
-type Note @model @aws_cognito_user_pools {
+type Note @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
   description: String
   image: String
-  owner: String
 }

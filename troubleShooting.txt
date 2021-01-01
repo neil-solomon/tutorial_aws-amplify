@@ -44,3 +44,4 @@ To make auth changes to a graphql thing
     'amplify push' then push a commit to github for the frontend changes.
 
 Removing @auth and doing the above steps made everything work, even when Cognito was set as a secondary API authorization
+Tried using @aws_cognito_user_pools instead of @auth. didn't work

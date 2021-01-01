@@ -8,9 +8,9 @@ export const getNote = /* GraphQL */ `
       name
       description
       image
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -26,9 +26,9 @@ export const listNotes = /* GraphQL */ `
         name
         description
         image
-        owner
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
