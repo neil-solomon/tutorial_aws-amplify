@@ -122,6 +122,7 @@ function App() {
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         placeholder="Note name"
         value={formData.name}
+        data-test="noteNameInput"
       />
       <input
         onChange={(e) =>
@@ -129,9 +130,12 @@ function App() {
         }
         placeholder="Note description"
         value={formData.description}
+        data-test="noteDescriptionInput"
       />
       <input type="file" onChange={onChange} />
-      <button onClick={createNote}>Create Note</button>
+      <button onClick={createNote} data-test="createNoteButton">
+        Create Note
+      </button>
       <div style={{ marginBottom: 30 }}>
         {notes.map((note) => (
           <div key={note.id || note.name}>

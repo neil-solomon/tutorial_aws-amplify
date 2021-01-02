@@ -46,3 +46,7 @@ log in in the browser, even if it was from a different window.
 The owner in dynamodb is the same as the username in coginto user pool, but this username is auto-generated random stuff.
 
 To make the subscription work make a graphql query the same way fetchNotes() does and pass in the username in the owner variable.
+
+GraphQL table examples https://iamondemand.com/blog/6-graphql-authorization-schemas-for-aws-amplify/
+
+Can't get the cypress tests working because withAuthenticator is all shadowDom stuff.
